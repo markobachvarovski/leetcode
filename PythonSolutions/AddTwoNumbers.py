@@ -125,8 +125,8 @@ class Solution:
 
 if __name__ == '__main__':
     # Test case 1
-    # l1 = ListNode(2, ListNode(4, ListNode(3, None)))
-    # l2 = ListNode(5, ListNode(6, ListNode(4, None)))
+    l1 = ListNode(2, ListNode(4, ListNode(3, None)))
+    l2 = ListNode(5, ListNode(6, ListNode(4, None)))
 
     # Test case 2
     l1 = ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9, None)))))))
