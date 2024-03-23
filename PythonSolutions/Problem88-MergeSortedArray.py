@@ -7,20 +7,16 @@ class Solution:
         index1 = m - 1
         index2 = n - 1
 
-        if m == 0:
-            for i in range(0, n):
-                nums1[i] = nums2[i]
-        else:
-            for i in range(m+n-1, 0, -1):
-                if nums1[index1] >= nums2[index2]:
+        for i in range(m+n-1, -1, -1):
+            if index2 >= 0:
+                if index1 >= 0 and nums1[index1] >= nums2[index2]:
                     nums1[i] = nums1[index1]
                     index1 -= 1
                 else:
                     nums1[i] = nums2[index2]
                     index2 -= 1
-
-            if index2 != 0 and index1 == 0:
-                nums1[0] = nums2[0]
+            else:
+                break
 
         return nums1
 
@@ -31,7 +27,6 @@ if __name__ == '__main__':
         3: [[0], 0, [1], 1],
         4: [[2,0], 1, [1], 1]
     }
-    key = 4
-    Solution().merge(testStrings[key][0], testStrings[key][1], testStrings[key][2], testStrings[key][3])
+
     for key in testStrings:
         print(f"The merged result of {testStrings[key][0]} and {testStrings[key][2]} is: {Solution().merge(testStrings[key][0], testStrings[key][1], testStrings[key][2], testStrings[key][3])}")
