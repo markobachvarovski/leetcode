@@ -19,12 +19,12 @@ if __name__ == '__main__':
         1: ["leetcode", ["leet", "code"]],
         2: ["applepenapple", ["apple","pen"]],
         3: ["catsandog", ["cats","dog","sand","and","cat"]],
-        4: ["cars", ["car","ca","rs"]],
-        5: ["ccbb", []]
+        4: ["cars", ["car","ca","rs"]]
     }
 
-    key=3
-    Solution().wordBreak(testWords[key][0], testWords[key][1])
     for key in testWords:
-        print(
-            Solution().wordBreak(testWords[key][0], testWords[key][1]))
+        if Solution().wordBreak(testWords[key][0], testWords[key][1]):
+            print(f"{testWords[key][0]} can be broken down in a combination of the following words: {testWords[key][1]}")
+        else:
+            print(
+                f"{testWords[key][0]} can not be broken down in a combination of the following words: {testWords[key][1]}")
