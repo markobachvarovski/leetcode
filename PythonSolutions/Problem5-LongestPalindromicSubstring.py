@@ -1,26 +1,28 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        glbLongestPalindrome = s[0]
-        lclLongestPalindrome = s[0]
+        res = ""
+        resLen = 0
 
-        for startIndex in range(0, len(s)):
-            for stopIndex in range(startIndex, len(s)):
-                substring = s[startIndex:stopIndex]
-                reverseSubstring = substring[::-1]
+        for i in range(len(s)):
+            # odd length
+            l, r = i, i
+            while l >= 0 and r < len(s) and s[l] == s[r]:
+                if (r - l + 1) > resLen:
+                    res = s[l: r + 1]
+                    resLen = r - l + 1
+                l -= 1
+                r += 1
 
-                # Scenario 1: Even palindrome with an even or odd stopping index
-                if s[startIndex:stopIndex + (stopIndex - startIndex)] == substring + reverseSubstring\
-                        or s[startIndex:stopIndex + (stopIndex - startIndex) - 1] == substring + reverseSubstring:
-                    lclLongestPalindrome = substring + reverseSubstring
-                # Scenario 2: Odd palindrome with even or odd stopping index
-                elif s[startIndex:stopIndex + (stopIndex - startIndex)] == substring + reverseSubstring[1:]\
-                        or s[startIndex:stopIndex + (stopIndex - startIndex) - 1] == substring + reverseSubstring[1:]:
-                    lclLongestPalindrome = substring + reverseSubstring[1:]
+            # even length
+            l, r = i, i + 1
+            while l >= 0 and r < len(s) and s[l] == s[r]:
+                if (r - l + 1) > resLen:
+                    res = s[l: r + 1]
+                    resLen = r - l + 1
+                l -= 1
+                r += 1
 
-                if len(lclLongestPalindrome) > len(glbLongestPalindrome):
-                    glbLongestPalindrome = lclLongestPalindrome
-
-        return glbLongestPalindrome
+        return res
 
 if __name__ == '__main__':
     testStrings = {
