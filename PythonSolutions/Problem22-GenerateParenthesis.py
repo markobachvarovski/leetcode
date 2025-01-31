@@ -3,35 +3,20 @@ from typing import List
 
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        res = []
+        ans = []
 
-        if n == 1:
-            return ["()"]
+        def backtrack(open_count, close_count, path):
+            if open_count > n or close_count > n or open_count < close_count:
+                return
 
-        parenthesis = self.generateParenthesis(n - 1)
+            if open_count == n and close_count == n:
+                ans.append(path)
+                return
+            backtrack(open_count + 1, close_count, path + '(')
+            backtrack(open_count, close_count + 1, path + ')')
 
-        for p in parenthesis:
-            p_list = list(p)
-            p_list.insert(0, ")")
-            p_list.insert(0, "(")
-
-            res.append(''.join(p_list))
-            last_close_bracket_index = 1
-            count = 0
-
-            for i in range(2, len(p_list)):
-                if p_list[i] == "(":
-                    count += 1
-                else:
-                    count -= 1
-
-                if count == 0:
-                    p_list.insert(i, ")")
-                    p_list.pop(last_close_bracket_index)
-                    last_close_bracket_index = i
-                    res.append(''.join(p_list))
-
-        return res
+        backtrack(0, 0, '')
+        return ans
 
 
 if __name__ == '__main__':
